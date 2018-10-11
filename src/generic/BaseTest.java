@@ -21,6 +21,8 @@ abstract public class BaseTest implements IAutoConst {
 	
 	//public String url = "http://localhost/login.do"; instead of hardcoding we store it in utilites
 	//and store it in interface
+	//getPropertyValue is a static method.we call with the help of class name
+	//URL we are getting value from config.properties file
 	public String url = Utility.getPropertyValue(CONFIG_PATH,"URL");
 	String ITO = Utility.getPropertyValue(CONFIG_PATH,"ITO");
 	
@@ -29,14 +31,14 @@ abstract public class BaseTest implements IAutoConst {
 	//it is prefered to take value from excel sheet
 	//even without selenium enginner mannual test engineer should be able to run the frame work
 	
-	public long duration =Long.parseLong(ITO);//convert strint to long
+	public long duration =Long.parseLong(ITO);//convert string to long
 	
 	static {
 		System.setProperty(CHROME_KEY,CHROME_VALUE);//always final should be capital
 		System.setProperty(GECKO_KEY,GECKO_VALUE);
 	}
 	@Parameters({"ip","browser"})
-	@BeforeMethod
+	@BeforeMethod(alwaysRun=true)
 	public void openApplication(@Optional("localhost")String ip,@Optional("chrome")String browser) {
 	
 	 //to acheive grid we use following code
